@@ -138,7 +138,10 @@ static time_t renewal_timeout;
 static time_t rebind_timeout;
 static time_t lease_timeout;
 static DWORD  send_timeout;
-static BOOL   trace_on = FALSE;
+
+#if defined(USE_DEBUG)
+static BOOL   trace_on = FALSE; /* set true for verbose DHCP debug */
+#endif
 
 static char       config_file [MAX_VALUELEN+1] = "";
 static sock_type *sock = NULL;
@@ -1139,9 +1142,16 @@ int DHCP_do_boot (void)
     now = time(NULL);
     if (last != now)
     {
-      last = now, putc('.', stderr);    /* indicate activity */
+#if defined(USE_DEBUG)
+      if(!trace_on)
+#endif
+         putc('.', stderr);             /* indicate activity */
+
+
       if (now > timeout)                /* timeout reached */
          break;
+
+       last = now;
     }
   }
 
