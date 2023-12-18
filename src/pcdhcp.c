@@ -824,6 +824,7 @@ static void store_DHCP_server_MAC (void)
  */
 static void DHCP_state_BOUND (int event)
 {
+  TRACE (("\n\n%s(%d):\n", __FUNCTION__, event));
   if (event == EVENT_T1_TIMEOUT) /* renewal timeout */
   {
     old_ip_addr = my_ip_addr;    /* remember current address */
@@ -843,6 +844,7 @@ static void DHCP_state_BOUND (int event)
  */
 static void DHCP_state_REQUESTING (int event)
 {
+  TRACE (("\n\n%s(%d):\n", __FUNCTION__, event));
   if (event == EVENT_SEND_TIMEOUT)
   {
     TRACE (("Sending DHCP request 00\n"));
@@ -894,6 +896,7 @@ static void DHCP_state_REQUESTING (int event)
  */
 static void DHCP_state_REBINDING (int event)
 {
+  TRACE (("\n\n%s(%d):\n", __FUNCTION__, event));
   if (event == EVENT_ACK)
   {
     TRACE (("Got DHCP ack while rebinding\n"));
@@ -919,6 +922,7 @@ static void DHCP_state_REBINDING (int event)
  */
 static void DHCP_state_RENEWING (int event)
 {
+  TRACE (("\n\n%s(%d):\n", __FUNCTION__, event));
   if (event == EVENT_SEND_TIMEOUT)
   {
     TRACE (("Sending DHCP request for renew\n"));
@@ -955,6 +959,7 @@ static void DHCP_state_RENEWING (int event)
  */
 static void DHCP_state_SELECTING (int event)
 {
+  TRACE (("\n\n%s(%d):\n", __FUNCTION__, event));
   if (event == EVENT_OFFER && !got_offer && DHCP_offer(&dhcp_in))
   {
     TRACE (("Got DHCP offer\n"));
@@ -986,6 +991,7 @@ static void DHCP_state_SELECTING (int event)
  */
 static void DHCP_state_INIT (int event)
 {
+  TRACE (("\n\n%s(%d):\n", __FUNCTION__, event));
   if (event == EVENT_SEND_TIMEOUT)
   {
     discover_loops++;
@@ -1005,6 +1011,7 @@ static void DHCP_state_INIT (int event)
  */
 static void DHCP_state_REBOOTING (int event)
 {
+  TRACE (("\n\n%s(%d):\n", __FUNCTION__, event));
   if (event == EVENT_ACK)
   {
     DHCP_state = DHCP_state_BOUND;
