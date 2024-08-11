@@ -41,6 +41,10 @@ static DWORD get_cpuid2 (int level, void *result, unsigned line);
 static int  trace_level = 0;
 static char vendor_str [13];
 
+#if defined(__DJGPP__) && (DJGPP_MINOR < 4)
+#define snprintf __builtin_snprintf
+#endif
+
 #if defined(__HIGHC__) || defined(BCC32_OLD)
   /*
    * High-C and old Borland compilers does not handle 'var-args' macros.

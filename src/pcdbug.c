@@ -24,6 +24,10 @@
   #include <sys/xdevices.h>
 #endif
 
+#if defined(__DJGPP__) && (DJGPP_MINOR < 4)
+#define snprintf __builtin_snprintf
+#endif
+
 #if defined(_WIN32) && !defined(__CYGWIN__)
   #include <fcntl.h>
 
